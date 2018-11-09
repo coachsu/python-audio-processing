@@ -8,8 +8,10 @@ wf = wave.open('./audio.wav', 'rb')			# Opening audio file as binary data
 p = pyaudio.PyAudio()					# Instantiate PyAudio
 
 wav_channels = wf.getnchannels()
-wav_rate = wf.getframerate()
+wav_rate = int(wf.getframerate() * 0.8)
 wav_width = wf.getsampwidth()
+
+print wav_rate
 
 stream = p.open(
 	format = p.get_format_from_width(wav_width),
