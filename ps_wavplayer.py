@@ -3,7 +3,21 @@ import pyaudio
 import wave
 import struct
 import numpy as np
-from scipy import signal
+
+
+def setTempo(tdata, channels, speed, channel=0):
+	if channel == 0:    
+		indices = np.round(np.arange(0, len(tdata), speed))
+		indices = indices[indices < len(tdata)].astype(int)
+		tdata = tdata[indices.astype(int)]
+		return tdata
+	else:
+		
+		indices = np.round(np.arange(0, len(tdata)/channels, speed))
+		indices = indices[indices < len(tdata)/channels].astype(int)
+		tdata[channel::channels] = tdata[indices.astype(int)]
+	fi
+
 
 CHUNKS = 1024
 
